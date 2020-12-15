@@ -7,6 +7,20 @@ let path = require("path");
 
 let app = express();
 const route = require("./routes/route");
+//connecting to mongodb
+
+mongoose.connect("mongodb://localhost:27017/contactlist", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+//on connection
+
+mongoose.connection.on("errot", (err) => {
+  if (err) {
+    console.log("error in database connection is" + err);
+  }
+  console.log("connection establised @port:27017");
+});
 
 //port
 const port = 3000;
